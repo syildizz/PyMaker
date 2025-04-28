@@ -10,6 +10,8 @@ to a cluster of computers using Kubernetes.
 
 The Ollama instance is deployed locally and uses the llama3.2 model by default. 
 
+![main-image](./github_asset/main-page.png)
+
 ## Deployment
 
 ### Docker Compose
