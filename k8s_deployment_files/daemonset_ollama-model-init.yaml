@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ollama-model-init
+  labels:
+    app: ollama-model-init
+spec:
+  selector:
+    matchLabels:
+      name: ollama-model-init
+  template:
+    metadata:
+      labels:
+        name: ollama-model-init
+    spec:
+      containers:
+      - name: ollama-model-init
+        image: ollama/ollama
+        volumeMounts:
+          - mountPath: "/root/.ollama"
+            name: ollama-storage
+        command: ["/bin/sh", "-c"]
+        args:
+          - ollama serve &
+            sleep 5;
+            ollama pull llama3.2;
+            while :;
+            do sleep 10;
+            done;
+      volumes:
+        - name: ollama-storage
+          hostPath:
+            path: /root/.ollama

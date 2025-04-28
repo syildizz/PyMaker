@@ -1,0 +1,1 @@
+kubectl logs -l name=ollama-model-init

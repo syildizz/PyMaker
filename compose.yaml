@@ -1,0 +1,34 @@
+---
+
+services:
+
+  pymaker-web:
+    restart: always
+    image: "pymaker-web:0.0.2"
+    pull_policy: never
+    ports:
+      - "80:8000"
+    configs:
+      - source: pymaker_config
+        target: /config/pymaker_config.json
+      - source: prompt_prefix
+        target: /config/prompt_prefix.txt
+    environment:
+      DOCKER_COMPOSE: "true"
+    depends_on:
+      - ollama
+
+  ollama:
+    restart: always
+    image: "ollama/ollama"
+    volumes:
+      - "ollama:/root/.ollama"
+
+configs:
+  pymaker_config:
+    file: ./config/pymaker_config.json
+  prompt_prefix:
+    file: ./config/prompt_prefix.txt
+
+volumes:
+  ollama:

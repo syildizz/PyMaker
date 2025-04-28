@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pymaker-web
+  labels:
+    app: pymaker-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pymaker-web
+  strategy: 
+    type: RollingUpdate
+  template:
+    #kind: Pod
+    metadata:
+      labels:
+        app: pymaker-web
+    spec:
+      containers:
+      - name: pymaker-web
+        image: pymaker-web:0.0.3
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8000
+        env:
+        - name: K8S
+          value: "true"
+        #resources: {}
+        volumeMounts:
+          - name: pymaker-config-volume
+            mountPath: "/config"
+      volumes:
+      - name: pymaker-config-volume
+        configMap:
+          name: pymaker-config

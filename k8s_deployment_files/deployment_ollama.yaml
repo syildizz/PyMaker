@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  strategy: 
+    type: RollingUpdate
+  template:
+    #kind: Pod
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: ollama/ollama
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 11434
+        volumeMounts:
+          - mountPath: "/root/.ollama"
+            name: ollama-storage
+      volumes:
+        - name: ollama-storage
+          hostPath:
+            path: /root/.ollama

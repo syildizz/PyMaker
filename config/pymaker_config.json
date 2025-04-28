@@ -1,0 +1,6 @@
+{
+    "ollama_host_ip": "ollama",
+    "ollama_host_port": 11434,
+    "ollama_model": "llama3.2",
+    "prompt_prefix_file": "prompt_prefix.txt"
+}

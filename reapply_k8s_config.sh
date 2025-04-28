@@ -1,0 +1,1 @@
+kubectl create cm pymaker-config --from-file config -o yaml --dry-run=client | kubectl apply -f -
