@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
       - name: pymaker-web
-        image: pymaker-web:0.0.3
-        imagePullPolicy: Never
+        image: syildizz/pymaker-web
+        #imagePullPolicy: Never
         ports:
           - containerPort: 8000
         env:
